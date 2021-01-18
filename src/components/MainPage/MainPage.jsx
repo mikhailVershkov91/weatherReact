@@ -1,11 +1,20 @@
 import React from "react";
 import s from "./MainPage.module.css";
+import { connect } from "react-redux";
+import {
+	getWeatherTC,
+	// getCityCreator,
+	// updateInputCreator,
+} from "../../store/weatherReducer";
 
 const MainPage = (props) => {
 
-  const onClick = () => {
-    
-  }
+	let inputCity = React.createRef()
+
+	const startSearch = () => {
+		let text = inputCity.current.value;
+		console.log(text);
+	};
 
 
 	return (
@@ -18,10 +27,10 @@ const MainPage = (props) => {
 						</div>
 						<div className={s.info__row}>
 							<div className={s.info__search}>
-								<input type="text" placeholder="City..." />
+								<input ref={inputCity} type="text" placeholder="City..."/>
 							</div>
 							<div className={s.info__btn}>
-								<button onClick={onClick}>Search</button>
+								<button onClick={startSearch}>Search</button>
 							</div>
 						</div>
 					</div>
@@ -31,4 +40,14 @@ const MainPage = (props) => {
 	);
 };
 
-export default MainPage;
+const mapStateToProps = (state) => ({
+	weather: state.weather.weatherData,
+});
+
+let MainPageContainer = connect(mapStateToProps, {
+	getWeatherTC,
+	// getCityCreator,
+	// updateInputCreator,
+})(MainPage);
+
+export default MainPageContainer;

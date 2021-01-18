@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React from "react";
 import s from "./Welcome.module.css";
 import logo from "../../assets/logo.png";
+
+// import sc from "../../js/parallax.js";
 
 const Welcome = () => {
 	// useEffect(() => {
@@ -14,7 +16,7 @@ const Welcome = () => {
 	// }, []);
 
 	return (
-		<div id={s.weather}>
+		<div className={s.weather}>
 			<div className={s.layer5}></div>
 			<div className={s.layer4}></div>
 			<div className={s.layer3}></div>
@@ -25,6 +27,7 @@ const Welcome = () => {
 			</div>
 			<div className={s.layer2}></div>
 			<div className={s.layer1}></div>
+			<script src="../../js/parallax.js"></script>
 		</div>
 	);
 };
