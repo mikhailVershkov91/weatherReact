@@ -1,17 +1,14 @@
 import React from "react";
 import s from "./MainPage.module.css";
 import { connect } from "react-redux";
-import {
-	// getWeatherTC,
-	startSearch,
-	updateInput,
-} from "../../store/weatherReducer";
+import { getWeather, updateInput } from "../../store/weatherReducer";
 
 const MainPage = (props) => {
 	let inputCity = React.createRef();
 
 	const onStartSearch = () => {
-		props.startSearch();
+		let text = inputCity.current.value;
+		props.getWeather(text);
 	};
 
 	let onInputChange = () => {
@@ -41,6 +38,11 @@ const MainPage = (props) => {
 								<button onClick={onStartSearch}>Search</button>
 							</div>
 						</div>
+						<div>
+							{props.weatherData.description && (
+								<span>The weather is {props.weatherData.description}</span>
+							)}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -50,10 +52,12 @@ const MainPage = (props) => {
 
 const mapStateToProps = (state) => ({
 	inputText: state.weather.inputText,
+	weatherData: state.weather.weatherData,
 });
 
-let MainPageContainer = connect(mapStateToProps, { updateInput, startSearch })(
-	MainPage
-);
+let MainPageContainer = connect(mapStateToProps, {
+	updateInput,
+	getWeather,
+})(MainPage);
 
 export default MainPageContainer;

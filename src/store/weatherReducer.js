@@ -1,42 +1,49 @@
 import { weatherAPI } from "../plugins/axios";
 
-// const SET_WEATHER = "SET_WEATHER";
-
-//
-const GET_CITY = "GET_CITY";
+const SET_WEATHER = "SET_WEATHER";
 const UPDATE_INPUT = "UPDATE_INPUT";
+const ClEAR_INPUT = "ClEAR_INPUT";
 
 const initialState = {
-	// weatherData: [],
+	weatherData: [],
 	inputText: "",
 };
 
 const weatherReducer = (state = initialState, action) => {
 	switch (action.type) {
-		// case SET_WEATHER: {
-		// 	return { ...state };
-		// }
-		case GET_CITY: {
-			let stateCopy = { ...state };
-			console.log(stateCopy.inputText);
-			stateCopy.inputText = "";
-			return stateCopy;
+		case ClEAR_INPUT: {
+			return {
+				...state,
+				inputText: "",
+			};
+		}
+		case SET_WEATHER: {
+			return {
+				...state,
+				weatherData: action.weatherData,
+			};
 		}
 		case UPDATE_INPUT: {
-			let stateCopy = { ...state };
-			stateCopy.inputText = action.newText;
-			return stateCopy;
+			return {
+				...state,
+				inputText: action.newText,
+			};
 		}
 		default:
 			return state;
 	}
 };
 
-//
-export const getCityActionCreator = () => ({ type: GET_CITY });
 export const updateInputActionCreator = (text) => ({
 	type: UPDATE_INPUT,
 	newText: text,
+});
+export const clearInputActionCreator = () => ({
+	type: ClEAR_INPUT,
+});
+export const setWeatherActionCreator = (data) => ({
+	type: SET_WEATHER,
+	weatherData: data,
 });
 
 export const updateInput = (text) => {
@@ -45,21 +52,13 @@ export const updateInput = (text) => {
 	};
 };
 
-export const startSearch = () => {
-	return (dispatch) => {
-		dispatch(getCityActionCreator());
+export const getWeather = (city) => {
+	return async (dispatch) => {
+		const response = await weatherAPI.getWeather(city);
+		dispatch(setWeatherActionCreator(response.weather[0]));
+		console.log(response.weather[0]);
+		dispatch(clearInputActionCreator());
 	};
 };
-
-// export const setWeatherAC = () => ({
-// 	type: "SET_WEATHER",
-// });
-
-// export const getWeatherTC = (name) => {
-// 	return async (dispatch) => {
-// 		const response = await weatherAPI.getWeather(name);
-// 		dispatch(setWeatherAC(response.weather));
-// 	};
-// };
 
 export default weatherReducer;
