@@ -2,20 +2,22 @@ import React from "react";
 import s from "./MainPage.module.css";
 import { connect } from "react-redux";
 import {
-	getWeatherTC,
-	// getCityCreator,
-	// updateInputCreator,
+	// getWeatherTC,
+	startSearch,
+	updateInput,
 } from "../../store/weatherReducer";
 
 const MainPage = (props) => {
+	let inputCity = React.createRef();
 
-	let inputCity = React.createRef()
-
-	const startSearch = () => {
-		let text = inputCity.current.value;
-		console.log(text);
+	const onStartSearch = () => {
+		props.startSearch();
 	};
 
+	let onInputChange = () => {
+		let text = inputCity.current.value;
+		props.updateInput(text);
+	};
 
 	return (
 		<div className={s.main}>
@@ -27,10 +29,16 @@ const MainPage = (props) => {
 						</div>
 						<div className={s.info__row}>
 							<div className={s.info__search}>
-								<input ref={inputCity} type="text" placeholder="City..."/>
+								<input
+									onChange={onInputChange}
+									ref={inputCity}
+									type="text"
+									placeholder="City..."
+									value={props.inputText}
+								/>
 							</div>
 							<div className={s.info__btn}>
-								<button onClick={startSearch}>Search</button>
+								<button onClick={onStartSearch}>Search</button>
 							</div>
 						</div>
 					</div>
@@ -41,13 +49,11 @@ const MainPage = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-	weather: state.weather.weatherData,
+	inputText: state.weather.inputText,
 });
 
-let MainPageContainer = connect(mapStateToProps, {
-	getWeatherTC,
-	// getCityCreator,
-	// updateInputCreator,
-})(MainPage);
+let MainPageContainer = connect(mapStateToProps, { updateInput, startSearch })(
+	MainPage
+);
 
 export default MainPageContainer;
