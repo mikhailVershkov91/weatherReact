@@ -1,32 +1,25 @@
 import { weatherAPI } from "../plugins/axios";
 
 const SET_WEATHER = "SET_WEATHER";
-const UPDATE_INPUT = "UPDATE_INPUT";
-const ClEAR_INPUT = "ClEAR_INPUT";
+const TOGGLE_SWITCH = "TOGGLE_SWITCH";
 
 const initialState = {
 	weatherData: [],
-	inputText: "",
+	toggleSwitch: false,
 };
 
 const weatherReducer = (state = initialState, action) => {
 	switch (action.type) {
-		case ClEAR_INPUT: {
-			return {
-				...state,
-				inputText: "",
-			};
-		}
 		case SET_WEATHER: {
 			return {
 				...state,
 				weatherData: action.weatherData,
 			};
 		}
-		case UPDATE_INPUT: {
+		case TOGGLE_SWITCH: {
 			return {
 				...state,
-				inputText: action.newText,
+				toggleSwitch: action.toggleSwitch,
 			};
 		}
 		default:
@@ -34,30 +27,24 @@ const weatherReducer = (state = initialState, action) => {
 	}
 };
 
-export const updateInputActionCreator = (text) => ({
-	type: UPDATE_INPUT,
-	newText: text,
-});
-export const clearInputActionCreator = () => ({
-	type: ClEAR_INPUT,
-});
 export const setWeatherActionCreator = (data) => ({
 	type: SET_WEATHER,
 	weatherData: data,
 });
 
-export const updateInput = (text) => {
-	return (dispatch) => {
-		dispatch(updateInputActionCreator(text));
-	};
-};
+export const toggleIsFetching = (toggleSwitch) => ({
+	type: TOGGLE_SWITCH,
+	toggleSwitch,
+});
 
 export const getWeather = (city) => {
 	return async (dispatch) => {
+		dispatch(toggleIsFetching(true));
 		const response = await weatherAPI.getWeather(city);
-		dispatch(setWeatherActionCreator(response.weather[0]));
-		console.log(response.weather[0]);
-		dispatch(clearInputActionCreator());
+		// dispatch(setWeatherActionCreator(response.weather[0]));
+		dispatch(setWeatherActionCreator(response));
+		console.log(response.main["temp"]);
+		dispatch(toggleIsFetching(false));
 	};
 };
 

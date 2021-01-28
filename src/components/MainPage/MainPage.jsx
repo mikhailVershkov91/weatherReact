@@ -1,19 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "./MainPage.module.css";
 import { connect } from "react-redux";
-import { getWeather, updateInput } from "../../store/weatherReducer";
+import { getWeather } from "../../store/weatherReducer";
+// import AutocompleteComponent from "../Autocomplete/Autocomplete";
+// import Preloader from "../preloader/Preloader";
+import WeatherInfo from "../WeatherInfo/WeatherInfo";
 
 const MainPage = (props) => {
-	let inputCity = React.createRef();
+	let [city, setCity] = useState("");
+	console.log(city);
 
-	const onStartSearch = () => {
-		let text = inputCity.current.value;
-		props.getWeather(text);
+	const onInputChange = (e) => {
+		setCity(e.target.value);
 	};
 
-	let onInputChange = () => {
-		let text = inputCity.current.value;
-		props.updateInput(text);
+	const onStartSearch = () => {
+		props.getWeather(city);
+		setCity("");
 	};
 
 	return (
@@ -28,10 +31,9 @@ const MainPage = (props) => {
 							<div className={s.info__search}>
 								<input
 									onChange={onInputChange}
-									ref={inputCity}
 									type="text"
 									placeholder="City..."
-									value={props.inputText}
+									value={city}
 								/>
 							</div>
 							<div className={s.info__btn}>
@@ -39,10 +41,14 @@ const MainPage = (props) => {
 							</div>
 						</div>
 						<div>
-							{props.weatherData.description && (
-								<span>The weather is {props.weatherData.description}</span>
+							{props.weatherData.name && (
+								<WeatherInfo weatherData={props.weatherData} />
 							)}
 						</div>
+
+						{/* <div className={s.autocomplete}>
+							<AutocompleteComponent />
+						</div> */}
 					</div>
 				</div>
 			</div>
@@ -51,12 +57,11 @@ const MainPage = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-	inputText: state.weather.inputText,
 	weatherData: state.weather.weatherData,
+	toggleSwitch: state.weather.toggleSwitch,
 });
 
 let MainPageContainer = connect(mapStateToProps, {
-	updateInput,
 	getWeather,
 })(MainPage);
 

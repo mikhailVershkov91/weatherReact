@@ -15,9 +15,6 @@
 	flex: 1 1 auto;
 }
 
-.info {
-}
-
 .container {
 	max-width: 1180px;
 	margin: 0px auto;
@@ -72,4 +69,10 @@
 
 .info__btn button:hover {
 	background: rgba(255, 255, 255, 0.4);
+}
+
+.autocomplete {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }

@@ -1,0 +1,15 @@
+.inputField {
+	width: 300px;
+	border: none;
+	background: rgba(255, 255, 255, 0.25);
+	border-radius: 7px;
+}
+
+.inputField:hover {
+	background: rgba(255, 255, 255, 0.4);
+}
+
+/* .text {
+	color: #ffffff;
+	font-size: 40px;
+} */
