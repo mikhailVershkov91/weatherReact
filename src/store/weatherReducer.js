@@ -5,7 +5,7 @@ const TOGGLE_SWITCH = "TOGGLE_SWITCH";
 
 const initialState = {
 	weatherData: [],
-	toggleSwitch: false,
+	// toggleSwitch: false,
 };
 
 const weatherReducer = (state = initialState, action) => {
@@ -16,12 +16,12 @@ const weatherReducer = (state = initialState, action) => {
 				weatherData: action.weatherData,
 			};
 		}
-		case TOGGLE_SWITCH: {
-			return {
-				...state,
-				toggleSwitch: action.toggleSwitch,
-			};
-		}
+		// case TOGGLE_SWITCH: {
+		// 	return {
+		// 		...state,
+		// 		toggleSwitch: action.toggleSwitch,
+		// 	};
+		// }
 		default:
 			return state;
 	}
@@ -32,19 +32,17 @@ export const setWeatherActionCreator = (data) => ({
 	weatherData: data,
 });
 
-export const toggleIsFetching = (toggleSwitch) => ({
-	type: TOGGLE_SWITCH,
-	toggleSwitch,
-});
+// export const toggleIsFetching = (toggleSwitch) => ({
+// 	type: TOGGLE_SWITCH,
+// 	toggleSwitch,
+// });
 
 export const getWeather = (city) => {
 	return async (dispatch) => {
-		dispatch(toggleIsFetching(true));
+		// dispatch(toggleIsFetching(true));
 		const response = await weatherAPI.getWeather(city);
-		// dispatch(setWeatherActionCreator(response.weather[0]));
 		dispatch(setWeatherActionCreator(response));
-		console.log(response.main["temp"]);
-		dispatch(toggleIsFetching(false));
+		// dispatch(toggleIsFetching(false));
 	};
 };
 

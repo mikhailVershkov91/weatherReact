@@ -1,0 +1,47 @@
+.wrapper {
+	display: flex;
+	justify-content: space-between;
+	background: rgba(255, 255, 255, 0.25);
+	padding: 15px;
+	border-radius: 20px;
+}
+
+img {
+	width: 150px;
+	height: 150px;
+}
+
+.cityImage {
+	margin: 0;
+	padding: 0;
+}
+
+.cityImage span {
+	font-size: 30px;
+}
+
+.icons {
+	display: flex;
+	justify-content: space-around;
+	flex-direction: column;
+	width: 70%;
+}
+
+.icons span {
+	display: block;
+	padding: 5px;
+	font-size: 18px;
+
+	text-align: center;
+}
+
+.icons div {
+	border-radius: 7px;
+}
+
+.row1,
+.row2 {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+}

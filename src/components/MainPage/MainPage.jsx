@@ -40,7 +40,7 @@ const MainPage = (props) => {
 								<button onClick={onStartSearch}>Search</button>
 							</div>
 						</div>
-						<div>
+						<div className={s.info__weather}>
 							{props.weatherData.name && (
 								<WeatherInfo weatherData={props.weatherData} />
 							)}
@@ -58,7 +58,7 @@ const MainPage = (props) => {
 
 const mapStateToProps = (state) => ({
 	weatherData: state.weather.weatherData,
-	toggleSwitch: state.weather.toggleSwitch,
+	// toggleSwitch: state.weather.toggleSwitch,
 });
 
 let MainPageContainer = connect(mapStateToProps, {

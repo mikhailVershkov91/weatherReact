@@ -71,8 +71,19 @@
 	background: rgba(255, 255, 255, 0.4);
 }
 
-.autocomplete {
+.info__weather {
+	margin: 0px auto;
+	border: none;
+	max-width: 750px;
+	margin-top: 30px;
+	padding: 16px 20px;
+	color: #ffffff;
+	font-size: 18px;
+	border-radius: 7px;
+}
+
+/* .autocomplete {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
+} */
