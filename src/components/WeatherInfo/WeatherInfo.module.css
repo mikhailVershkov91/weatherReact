@@ -12,12 +12,28 @@ img {
 }
 
 .cityImage {
-	margin: 0;
-	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
-.cityImage span {
+.cityName {
+	position: relative;
+	bottom: 20px;
+}
+
+.cityName span {
 	font-size: 30px;
+}
+
+.description {
+	position: relative;
+	left: 30px;
+	bottom: 45px;
+}
+
+.description span {
+	font-size: 12px;
 }
 
 .icons {

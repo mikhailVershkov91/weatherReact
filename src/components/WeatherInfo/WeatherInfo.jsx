@@ -5,29 +5,40 @@ import clearSky from "../../assets/sunny.png";
 import rainy from "../../assets/rainy.png";
 import cloudy from "../../assets/cloudy.png";
 import foggy from "../../assets/foggy.png";
+import haze from "../../assets/haze.png";
 
 const WeatherInfo = (props) => {
 	return (
 		<div className={s.wrapper}>
 			<div className={s.cityImage}>
 				<div>
-					{props.weatherData.weather[0].main == "Clear" && (
+					{props.weatherData.weather[0].main === "Clear" && (
 						<img src={clearSky} alt="clear sky" />
 					)}
-					{props.weatherData.weather[0].main == "Snow" && (
+					{props.weatherData.weather[0].main === "Snow" && (
 						<img src={snowy} alt="snowy" />
 					)}
-					{props.weatherData.weather[0].main == "Rain" && (
+					{props.weatherData.weather[0].main === "Rain" && (
 						<img src={rainy} alt="rainy" />
 					)}
-					{props.weatherData.weather[0].main == "Clouds" && (
+					{props.weatherData.weather[0].main === "Clouds" && (
 						<img src={cloudy} alt="cloudy" />
 					)}
-					{props.weatherData.weather[0].main == "Fog" && (
+					{props.weatherData.weather[0].main === "Fog" && (
 						<img src={foggy} alt="foggy" />
 					)}
+					{props.weatherData.weather[0].main === "Mist" && (
+						<img src={foggy} alt="foggy" />
+					)}
+					{props.weatherData.weather[0].main === "Haze" && (
+						<img src={haze} alt="haze" />
+					)}
+					<div className={s.description}>
+						<span>{props.weatherData.weather[0].description}</span>
+					</div>
 				</div>
-				<div>
+
+				<div className={s.cityName}>
 					<span>{props.weatherData.name}</span>
 				</div>
 			</div>

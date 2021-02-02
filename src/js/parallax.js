@@ -1,4 +1,5 @@
-const scene = document.querySelector("weather");
+const scene = document.getElementById("weather");
+console.log("Im here");
 const layers = scene.children;
 const depth = [0.2, 0.4, 0.6, 0.6, 0.8, 1];
 

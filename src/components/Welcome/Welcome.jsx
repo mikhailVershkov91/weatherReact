@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import s from "./Welcome.module.css";
 import logo from "../../assets/logo.png";
 
 // import sc from "../../js/parallax.js";
 
 const Welcome = () => {
+	// useScript("../../js/parallax.js");
+
 	// useEffect(() => {
 	// 	const script = document.createElement("script");
 	// 	script.src = "../../js/parallax.js";
@@ -27,7 +29,7 @@ const Welcome = () => {
 			</div>
 			<div className={s.layer2}></div>
 			<div className={s.layer1}></div>
-			<script src="../../js/parallax.js"></script>
+			{/* <script type="text/javascript" src="../../js/parallax.js"></script> */}
 		</div>
 	);
 };

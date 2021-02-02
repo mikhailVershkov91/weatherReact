@@ -1,7 +1,7 @@
 import { weatherAPI } from "../plugins/axios";
 
 const SET_WEATHER = "SET_WEATHER";
-const TOGGLE_SWITCH = "TOGGLE_SWITCH";
+// const TOGGLE_SWITCH = "TOGGLE_SWITCH";
 
 const initialState = {
 	weatherData: [],

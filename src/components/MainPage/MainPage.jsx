@@ -8,7 +8,6 @@ import WeatherInfo from "../WeatherInfo/WeatherInfo";
 
 const MainPage = (props) => {
 	let [city, setCity] = useState("");
-	console.log(city);
 
 	const onInputChange = (e) => {
 		setCity(e.target.value);
