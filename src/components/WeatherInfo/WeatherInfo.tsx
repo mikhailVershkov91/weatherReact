@@ -7,7 +7,7 @@ import cloudy from "../../assets/cloudy.png";
 import foggy from "../../assets/foggy.png";
 import haze from "../../assets/haze.png";
 
-const WeatherInfo = (props) => {
+const WeatherInfo = (props: any) => {
 	return (
 		<div className={s.wrapper}>
 			<div className={s.cityImage}>

@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, FC, ChangeEvent } from "react";
 import s from "./MainPage.module.css";
 import { connect } from "react-redux";
 import { getWeather } from "../../store/weatherReducer";
 // import AutocompleteComponent from "../Autocomplete/Autocomplete";
 // import Preloader from "../preloader/Preloader";
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
+import { AppStateType } from "../../store/store";
 
-const MainPage = (props) => {
+type MapStatePropsType = {
+	weatherData: any;
+};
+
+type MapDispatchPropsType = {
+	getWeather: (city: string) => void;
+};
+
+export type PropsType = MapStatePropsType & MapDispatchPropsType;
+
+const MainPage: FC<PropsType> = (props) => {
 	let [city, setCity] = useState("");
 
-	const onInputChange = (e) => {
+	const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setCity(e.target.value);
 	};
 
@@ -55,9 +66,8 @@ const MainPage = (props) => {
 	);
 };
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
 	weatherData: state.weather.weatherData,
-	// toggleSwitch: state.weather.toggleSwitch,
 });
 
 let MainPageContainer = connect(mapStateToProps, {

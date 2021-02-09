@@ -6,10 +6,21 @@ const instance = axios.create({
 	baseURL: "https://api.openweathermap.org/data/2.5/",
 });
 
+type ResponseType = {
+	// data: {
+	// 	weather: any;
+	// 	main: any;
+	// 	wind: any;
+	// 	clouds: any;
+	// 	name: string;
+	// };
+	data: string;
+};
+
 export const weatherAPI = {
-	getWeather(city) {
+	getWeather(city: string) {
 		return instance
-			.get(`weather?q=${city}&appid=${API_KEY}`)
+			.get<ResponseType>(`weather?q=${city}&appid=${API_KEY}`)
 			.then((response) => response.data);
 	},
 };
