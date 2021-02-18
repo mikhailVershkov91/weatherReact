@@ -8,7 +8,7 @@ import { getWeather } from "../../store/weatherReducer";
 const AutocompleteComponent = (props) => {
 	const cities = [
 		"London",
-		"Los-Angeles",
+		"Saint Petersburg",
 		"Liverpool",
 		"Amsterdam",
 		"Kaliningrad",
@@ -16,11 +16,11 @@ const AutocompleteComponent = (props) => {
 		"Moscow",
 	];
 
-	const [value, setValue] = useState(cities[0]);
+	const [city, setCity] = useState("");
 
-	const onValueSelect = (value) => {
-		console.log(value);
-		props.getWeather(value);
+	const onCitySelect = (city) => {
+		props.getWeather(city);
+		setCity({ content: null });
 	};
 
 	return (
@@ -28,48 +28,23 @@ const AutocompleteComponent = (props) => {
 			className={s.inputField}
 			id="city-select"
 			options={cities}
-			onChange={(value) => {
-				setValue(value);
-				// props.getWeather(value);
-				onValueSelect(value);
+			onChange={(event, cityName) => {
+				setCity(cityName);
+				onCitySelect(cityName);
 			}}
-			// autoHighlight
-			// getOptionLabel={(option) => option.label}
-			// renderOption={(option) => <React.Fragment>{option.label}</React.Fragment>}
 			renderInput={(params) => (
-				<TextField
-					{...params}
-					label="Choose a city"
-					variant="outlined"
-					// inputProps={{
-					// 	...params.inputProps,
-					// }}
-					// ref={inputCity}
-				/>
+				<TextField {...params} label="Choose a city" variant="outlined" />
 			)}
 		/>
 	);
 };
 
-// const cities = [
-// 	{ label: "London" },
-// 	{ label: "Los-Angeles" },
-// 	{ label: "Liverpool" },
-// 	{ label: "Amsterdam" },
-// 	{ label: "Kaliningrad" },
-// 	{ label: "Shymkent" },
-// 	{ label: "Moscow" },
-// ];
-
 const mapStateToProps = (state) => ({
-	// textFieldValue: state.autocomplete.textFieldValue,
 	weatherData: state.autocomplete.weatherData,
 });
 
 let AutocompleteContainer = connect(mapStateToProps, {
 	getWeather,
-	// updateInput,
-	// setValue,
 })(AutocompleteComponent);
 
 export default AutocompleteContainer;

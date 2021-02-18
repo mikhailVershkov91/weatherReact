@@ -2,7 +2,7 @@ import React, { useState, FC, ChangeEvent } from "react";
 import s from "./MainPage.module.css";
 import { connect } from "react-redux";
 import { getWeather } from "../../store/weatherReducer";
-// import AutocompleteComponent from "../Autocomplete/Autocomplete";
+import AutocompleteComponent from "../Autocomplete/Autocomplete";
 // import Preloader from "../preloader/Preloader";
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
 import { AppStateType } from "../../store/store";
@@ -56,9 +56,9 @@ const MainPage: FC<PropsType> = (props) => {
 							)}
 						</div>
 
-						{/* <div className={s.autocomplete}>
+						<div className={s.autocomplete}>
 							<AutocompleteComponent />
-						</div> */}
+						</div>
 					</div>
 				</div>
 			</div>

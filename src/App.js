@@ -11,6 +11,7 @@ function App() {
 			{/* <HelmetComponent /> */}
 			<Welcome />
 			<MainPage />
+			
 		</div>
 	);
 }
