@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware, combineReducers } from "redux";
 import thunkMiddleware from "redux-thunk";
 import weatherReducer from "./weatherReducer";
-import autocompleteReducer from "./autocompleteReducer";
+import citiesReducer from "./citiesReducer";
 
 let rootReducer = combineReducers({
 	weather: weatherReducer,
-	autocomplete: autocompleteReducer,
+	cities: citiesReducer,
 });
 
 type RootReducerType = typeof rootReducer;

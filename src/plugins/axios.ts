@@ -6,7 +6,7 @@ const instance = axios.create({
 	baseURL: "https://api.openweathermap.org/data/2.5/",
 });
 
-type ResponseType = {
+type ResponseWeatherType = {
 	// data: {
 	// 	weather: any;
 	// 	main: any;
@@ -17,10 +17,22 @@ type ResponseType = {
 	data: string;
 };
 
+type ResponseCitiesType = {
+	data: any;
+};
+
 export const weatherAPI = {
 	getWeather(city: string) {
 		return instance
-			.get<ResponseType>(`weather?q=${city}&appid=${API_KEY}`)
+			.get<ResponseWeatherType>(`weather?q=${city}&appid=${API_KEY}`)
+			.then((response) => response.data);
+	},
+};
+
+export const cityListAPI = {
+	getCities() {
+		return instance
+			.get<ResponseCitiesType>("https://city-list-json.herokuapp.com/cities")
 			.then((response) => response.data);
 	},
 };
