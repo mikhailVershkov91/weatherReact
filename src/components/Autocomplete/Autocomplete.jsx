@@ -4,31 +4,8 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import s from "./Autocomplete.module.css";
 import { connect } from "react-redux";
 import { getWeather } from "../../store/weatherReducer";
-import { getCity } from "../../store/citiesReducer";
-
-// import axios from "axios";
 
 const AutocompleteComponent = (props) => {
-	// const cities = [
-	// 	"London",
-	// 	"Saint Petersburg",
-	// 	"Liverpool",
-	// 	"Amsterdam",
-	// 	"Kaliningrad",
-	// 	"Shymkent",
-	// 	"Moscow",
-	// ];
-
-	// const check = axios
-	// 	.get("https://city-list-json.herokuapp.com/cities")
-	// 	.then((res) => console.log(res.data));
-
-	// console.log(check);
-
-	const onClickHandler = () => {
-		props.getCity();
-	};
-
 	const [city, setCity] = useState("");
 
 	const onCitySelect = (city) => {
@@ -49,19 +26,17 @@ const AutocompleteComponent = (props) => {
 					<TextField {...params} label="Choose a city" variant="outlined" />
 				)}
 			/>
-			<button onClick={onClickHandler}></button>
 		</div>
 	);
 };
 
 const mapStateToProps = (state) => ({
-	// weatherData: state.weather.weatherData,
 	cities: state.cities.cities,
+	isFetching: state.cities.isFetching,
 });
 
 let AutocompleteContainer = connect(mapStateToProps, {
 	getWeather,
-	getCity,
 })(AutocompleteComponent);
 
 export default AutocompleteContainer;

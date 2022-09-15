@@ -2,21 +2,7 @@ import React from "react";
 import s from "./Welcome.module.css";
 import logo from "../../assets/logo.png";
 
-// import sc from "../../js/parallax.js";
-
 const Welcome = () => {
-	// useScript("../../js/parallax.js");
-
-	// useEffect(() => {
-	// 	const script = document.createElement("script");
-	// 	script.src = "../../js/parallax.js";
-	// 	script.async = true;
-	// 	document.body.appendChild(script);
-	// 	return () => {
-	// 		document.body.removeChild(script);
-	// 	};
-	// }, []);
-
 	return (
 		<div className={s.weather}>
 			<div className={s.layer5}></div>
@@ -29,7 +15,6 @@ const Welcome = () => {
 			</div>
 			<div className={s.layer2}></div>
 			<div className={s.layer1}></div>
-			{/* <script type="text/javascript" src="../../js/parallax.js"></script> */}
 		</div>
 	);
 };

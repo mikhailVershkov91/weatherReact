@@ -6,6 +6,7 @@ import rainy from "../../assets/rainy.png";
 import cloudy from "../../assets/cloudy.png";
 import foggy from "../../assets/foggy.png";
 import haze from "../../assets/haze.png";
+import drizzle from "../../assets/drizzle.png";
 
 const WeatherInfo = (props: any) => {
 	return (
@@ -32,6 +33,9 @@ const WeatherInfo = (props: any) => {
 					)}
 					{props.weatherData.weather[0].main === "Haze" && (
 						<img src={haze} alt="haze" />
+					)}
+					{props.weatherData.weather[0].main === "Drizzle" && (
+						<img src={drizzle} alt="drizzle" />
 					)}
 					<div className={s.description}>
 						<span>{props.weatherData.weather[0].description}</span>

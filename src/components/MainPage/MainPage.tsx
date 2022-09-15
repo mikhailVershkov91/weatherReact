@@ -1,23 +1,30 @@
-import React, { useState, FC, ChangeEvent } from "react";
+import React, { useState, FC, ChangeEvent, useEffect } from "react";
 import s from "./MainPage.module.css";
 import { connect } from "react-redux";
 import { getWeather } from "../../store/weatherReducer";
-import AutocompleteComponent from "../Autocomplete/Autocomplete";
-// import Preloader from "../preloader/Preloader";
+// import AutocompleteComponent from "../Autocomplete/Autocomplete";
 import WeatherInfo from "../WeatherInfo/WeatherInfo";
 import { AppStateType } from "../../store/store";
+import Preloader from "../Preloader/Preloader";
+import { getCity } from "../../store/citiesReducer";
 
 type MapStatePropsType = {
 	weatherData: any;
+	isFetching: boolean;
 };
 
 type MapDispatchPropsType = {
 	getWeather: (city: string) => void;
+	getCity: () => void;
 };
 
 export type PropsType = MapStatePropsType & MapDispatchPropsType;
 
 const MainPage: FC<PropsType> = (props) => {
+	useEffect(() => {
+		props.getCity();
+	}, [props.getCity]);
+
 	let [city, setCity] = useState("");
 
 	const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -35,9 +42,13 @@ const MainPage: FC<PropsType> = (props) => {
 				<div className={s.info}>
 					<div className={s.container}>
 						<div className={s.info__title}>
-							Just start writing the name of the city...
+							Find your city and check the weather
 						</div>
 						<div className={s.info__row}>
+							<div className={s.autocomplete}>
+								{props.isFetching && <Preloader />}
+								{/* <AutocompleteComponent /> */}
+							</div>
 							<div className={s.info__search}>
 								<input
 									onChange={onInputChange}
@@ -55,10 +66,7 @@ const MainPage: FC<PropsType> = (props) => {
 								<WeatherInfo weatherData={props.weatherData} />
 							)}
 						</div>
-
-						<div className={s.autocomplete}>
-							<AutocompleteComponent />
-						</div>
+						{props.isFetching && <Preloader />}
 					</div>
 				</div>
 			</div>
@@ -68,10 +76,12 @@ const MainPage: FC<PropsType> = (props) => {
 
 const mapStateToProps = (state: AppStateType): MapStatePropsType => ({
 	weatherData: state.weather.weatherData,
+	isFetching: state.cities.isFetching,
 });
 
 let MainPageContainer = connect(mapStateToProps, {
 	getWeather,
+	getCity,
 })(MainPage);
 
 export default MainPageContainer;

@@ -7,13 +7,6 @@ const instance = axios.create({
 });
 
 type ResponseWeatherType = {
-	// data: {
-	// 	weather: any;
-	// 	main: any;
-	// 	wind: any;
-	// 	clouds: any;
-	// 	name: string;
-	// };
 	data: string;
 };
 
@@ -29,6 +22,7 @@ export const weatherAPI = {
 	},
 };
 
+//load cities too slowly
 export const cityListAPI = {
 	getCities() {
 		return instance
